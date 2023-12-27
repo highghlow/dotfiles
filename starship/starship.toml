@@ -5,7 +5,7 @@
 add_newline = true
 
 format = """
-[$username@$hostname](bold green):$directory
+[$username@$hostname](bold green):$directory$python
 [>](blue) 
 """
 
@@ -36,6 +36,11 @@ recognize_signal_code = false
 disabled = false
 style = "bold red"
 format = "[$int $symbol]($style)"
+
+[python]
+style = "white"
+format = '[(\($virtualenv\) )]($style)'
+pyenv_version_name = true
 
 # Disable the package module, hiding it from the prompt completely
 [package]
