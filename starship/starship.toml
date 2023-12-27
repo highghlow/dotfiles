@@ -29,6 +29,7 @@ disabled = false
 style = "yellow"
 truncation_length = 8
 truncation_symbol = '…/'
+read_only = ""
 
 [status]
 symbol = "↵"
