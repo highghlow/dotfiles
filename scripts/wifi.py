@@ -26,7 +26,7 @@ def split_with_escaping(string, separator, escape="\\"):
 @click.group()
 def cli(): pass
 
-@click.command()
+@cli.command()
 def connect():
     print("Loading wifi networks...")
 
@@ -58,7 +58,7 @@ def connect():
 
     subprocess.run(prompt)
 
-@click.command()
+@cli.command()
 def disconnect():
     proc = subprocess.Popen(["nmcli", "-t", "dev", "status"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     
@@ -88,9 +88,6 @@ def disconnect():
     print(f"Disconnecting ({if_id})...")
 
     subprocess.run(["nmcli", "dev", "disconnect", if_id])
-
-cli.add_command(connect)
-cli.add_command(disconnect)
 
 if __name__ == "__main__":
     cli()
