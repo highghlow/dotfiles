@@ -5,7 +5,7 @@
 		"position": "top",
 		"modules-left": ["sway/workspaces"],
 		"modules-center": ["sway/window"],
-		"modules-right": ["network#wifi", "network#ethernet", "network#disconnected", "pulseaudio", "memory", "cpu", "battery"],
+		"modules-right": ["network#wifi", "network#ethernet", "network#disconnected", "pulseaudio", "memory", "cpu", "battery", "clock"],
 
 		"cpu": {
 			"format": "CPU: {usage}%"
