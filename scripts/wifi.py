@@ -43,6 +43,10 @@ def connect():
             wifi_list_raw.split("\n")
     ][:-1]
 
+    if not wifi_list:
+        print("No wifi networks found")
+        exit(1)
+
     selection = [i[2] + " " + i[7] for i in wifi_list]
     selected = pick(selection, "WiFi networks:")[1]
     
