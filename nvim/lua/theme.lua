@@ -5,7 +5,7 @@ function apply_colors()
 	vim.api.nvim_set_hl(0, "TelescopeBorder", {bg="white"})
 	vim.cmd([[:hi Pmenu ctermbg=black guibg=black]])
 	vim.cmd([[:hi Pmenu ctermfg=white guifg=white]])
-	vim.cmd([[:hi BufferTabpageFill guibg=red]])
+	vim.cmd([[:hi MatchParen ctermbg=darkgrey guibg=darkgrey]])
 end
 
 vim.api.nvim_create_autocmd('ColorScheme', {
