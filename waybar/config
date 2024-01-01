@@ -1,0 +1,49 @@
+[
+	{
+		"name": "topbar",
+		"layer": "top",
+		"position": "top", 
+		"modules-left": ["sway/workspaces"],
+		"modules-center": ["sway/window"],
+		"modules-right": ["network#wifi", "network#ethernet", "network#disconnected", "pulseaudio", "memory", "cpu", "battery"],
+
+		"cpu": {
+			"format": "CPU: {usage}%"
+		},
+
+		"memory": {
+			"format": "RAM: {used:0.1f}G/{total:0.1f}G ({percentage}%)"
+		},
+
+		"battery": {
+			"format": "BAT: {capacity}%",
+			"format-charging": "CHR: {capacity}%",
+			"format-plugged": "PLG: {capacity}%"
+		},
+
+		"network#ethernet": {
+			"interface": "enp*",
+			"format-ethernet": "ETHER",
+			"format-wifi": "",
+			"format-disconnected": ""
+		},
+
+		"network#wifi": {
+			"interface": "wlp*",
+			"format-ethernet": "",
+			"format-wifi": "WIFI: {essid} ({signalStrength}%)",
+			"format-disconnected": ""
+		},
+
+		"network#disconnected": {
+			"format-ethernet": "",
+			"format-wifi": "",
+			"format-disconnected": "NOCON"
+		},
+
+		"pulseaudio": {
+			"format": "VOL: {volume}%",
+			"format-muted": "MUT: {volume}%"
+		}
+	}
+]
