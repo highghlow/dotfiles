@@ -1,5 +1,5 @@
 # Lock the screen
-bindsym $mod+l exec 'lockscreen' 
+bindsym $mod+l exec 'swayutil lockscreen' 
 
 # Start a terminal
 bindsym $mod+Return exec $term
