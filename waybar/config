@@ -1,8 +1,8 @@
 [
 	{
 		"name": "topbar",
-		"layer": "top",
-		"position": "top", 
+		"layer": "bottom",
+		"position": "top",
 		"modules-left": ["sway/workspaces"],
 		"modules-center": ["sway/window"],
 		"modules-right": ["network#wifi", "network#ethernet", "network#disconnected", "pulseaudio", "memory", "cpu", "battery"],

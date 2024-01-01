@@ -1,0 +1,4 @@
+#!/bin/sh
+bemenu-run -H 24 --no-exec | xargs swaymsg exec --
+
+
