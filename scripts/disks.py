@@ -1,0 +1,134 @@
+import subprocess
+import click
+from pick import pick
+import glob
+import os
+import re
+
+@click.group()
+def cli(): pass
+
+def format_size(num, suffix="B"):
+    for unit in ("", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi"):
+        if abs(num) < 1024.0:
+            return f"{num:3.1f}{unit}{suffix}"
+        num /= 1024.0
+    return f"{num:.1f}Yi{suffix}"
+
+def readfile(filename):
+    with open(filename) as f:
+        contents = f.read()
+    return contents
+
+def get_only(lst):
+    if len(lst) > 1:
+        raise ValueError("Multiple elements")
+    elif len(lst) == 0:
+        raise ValueError("No elements")
+
+    return lst[0]
+
+def string_disk_info(disk):
+    device_sysfolder = get_only(glob.glob(f"/sys/block/*/{disk}"))
+
+    if os.path.exists(os.path.join(device_sysfolder, "../device/vendor")):
+        vendor = readfile(os.path.join(device_sysfolder, "../device/vendor")).rstrip("\n")
+        model = readfile(os.path.join(device_sysfolder, "../device/model")).rstrip("\n")
+        device_name = f"{vendor} {model}"
+    else:
+        device_name = "Unknown device"
+
+    partid = readfile(os.path.join(device_sysfolder, "partition")).rstrip("\n")
+    size_blocks = int(readfile(os.path.join(device_sysfolder, "size")))
+    size = format_size(size_blocks * 512) # 512 - sector size
+
+    removable = False
+    if os.path.exists(os.path.join(device_sysfolder, "../removable")):
+        if readfile(os.path.join(device_sysfolder, "../removable")) == "1\n":
+            removable = True
+    removable_text = ", removable" if removable else ""
+
+    mounted = False
+    if get_mountpoint(f"/dev/{disk}"):
+        mounted = True
+    mounted_text = ", mounted" if mounted else ""
+
+    return f"/dev/{disk} {device_name}: {partid} ({size}{removable_text}{mounted_text})"
+
+def select_disk():
+    disks = []
+    for line in readfile("/proc/partitions").split("\n")[2:]:
+        disk_id = line.split(" ")[-1]
+        if disk_id not in os.listdir("/sys/block") and disk_id: # is a partition
+            disks.append(disk_id)
+
+    diskinfo_list = []
+
+    for disk in disks:
+        diskinfo_list.append(string_disk_info(disk))
+
+    _, selection = pick(diskinfo_list, "Disks:")
+    disk_id = disks[selection]
+    disk_path = "/dev/"+disk_id
+
+    return disk_id, disk_path
+
+def get_mountpoint(disk_path):
+    mounts = readfile("/proc/mounts")
+
+    for mount in mounts.split("\n"):
+        if not mount:
+            continue
+        device, mountpoint, _, _, _, _ = mount.split(" ")
+        if device == disk_path:
+            return mountpoint
+
+@cli.command()
+def mount():
+    disk_id, disk_path = select_disk()
+
+    if mountpoint := get_mountpoint(disk_path):
+        print(f"Mounted at {mountpoint}")
+        exit(0)
+
+    print(f"Mounting {disk_path}...")
+
+    retcode = subprocess.run(["pmount", disk_path]).returncode
+
+    if not retcode:
+        print(f"Mounted at /media/{disk_id}")
+    else:
+        print("pmount failed with exit code:", retcode)
+        print("trying root mount")
+        subprocess.run(["sudo", "mkdir", f"/media/{disk_id}", "-p"])
+        retcode = subprocess.run(["sudo", "mount", disk_path, f"/media/{disk_id}"]).returncode
+        if not retcode:
+            print(f"Mounted at /media/{disk_id}")
+        else:
+            exit(retcode)
+
+@cli.command()
+def umount():
+    disk_id, disk_path = select_disk()
+
+    if not get_mountpoint(disk_path):
+        print(f"{disk_path} is not mounted")
+        exit(0)
+
+    print(f"Unmounting {disk_path}...")
+
+    retcode = subprocess.run(["pumount", disk_path]).returncode
+
+    if not retcode:
+        print(f"Unmounted")
+    else:
+        print("pumount failed with exit code:", retcode)
+        print("trying root umount")
+        retcode = subprocess.run(["sudo", "umount", disk_path]).returncode
+        if not retcode:
+            print(f"Unmounted")
+        else:
+            exit(retcode)
+
+if __name__ == "__main__":
+    cli()
