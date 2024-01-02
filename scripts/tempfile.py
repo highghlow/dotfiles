@@ -5,7 +5,7 @@ import uuid
 def main():
     args = sys.argv[1:]
 
-    filename = "/tmp/" + uuid.uuid4().hex
+    filename = "/tmp/tempfile-" + uuid.uuid4().hex
 
     with open(filename, "w") as f:
         f.write(" ".join(args))
