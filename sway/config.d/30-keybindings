@@ -1,6 +1,9 @@
 # Lock the screen
 bindsym $mod+l exec 'swayutil lockscreen' 
 
+# Dismiss last notification
+bindsym $mod+n exec 'makoctl dismiss'
+
 # Start a terminal
 bindsym $mod+Return exec $term
 
