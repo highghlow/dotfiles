@@ -65,6 +65,8 @@ return packer.startup(function(use)
 
 	use("aspeddro/gitui.nvim")
 
+	use("EtiamNullam/deferred-clipboard.nvim")
+
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end
