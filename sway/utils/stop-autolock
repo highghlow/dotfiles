@@ -1,4 +1,4 @@
-if ps -e | grep swayidle > /dev/null;
+if pgrep swayidle > /dev/null;
 then
 
 killall swayidle
