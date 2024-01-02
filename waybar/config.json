@@ -5,7 +5,7 @@
 		"position": "top",
 		"modules-left": ["sway/workspaces"],
 		"modules-center": ["sway/window"],
-		"modules-right": ["network#wifi", "network#ethernet", "network#disconnected", "pulseaudio", "memory", "cpu", "battery", "clock"],
+		"modules-right": ["custom/autolock-status", "network#wifi", "network#ethernet", "network#disconnected", "pulseaudio", "memory", "cpu", "battery", "clock"],
 
 		"cpu": {
 			"format": "CPU: {usage}%"
@@ -44,6 +44,13 @@
 		"pulseaudio": {
 			"format": "VOL: {volume}%",
 			"format-muted": "MUT: {volume}%"
+		},
+
+		"custom/autolock-status": {
+			"format": "{}",
+			"return-type": "json",
+			"exec": "sh ~/.config/waybar/custom/autolock-status.sh",
+			"on-click": "swayutil toggle-autolock"
 		}
 	}
 ]

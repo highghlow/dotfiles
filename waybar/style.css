@@ -1,0 +1,14 @@
+@import "default.css";
+
+.alock-status {
+	padding: 0 10px;
+	color: #ffffff;
+}
+
+.alock-active {
+	background-color: green;
+}
+
+.alock-stopped {
+	background-color: red;
+}

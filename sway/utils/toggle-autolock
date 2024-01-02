@@ -1,0 +1,9 @@
+if pgrep swayidle; then
+
+swayutil stop-autolock
+
+else
+
+swayutil resume-autolock
+
+fi;
