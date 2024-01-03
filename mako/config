@@ -1,5 +1,14 @@
+[urgency="normal"]
 background-color=#2b303b
-progress-color=over #4c7899
+border-color=#1c4859
+
+[urgency="low"]
+background-color=#3b404b
+border-color=#505050
+
+[urgency="critical"]
+background-color=#a0404b
+border-color=#fc5879
 
 [app-name="volume-display"]
 anchor=center
