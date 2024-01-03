@@ -1,0 +1,77 @@
+#!/bin/env python3
+
+import click
+import glob
+import os
+import subprocess
+import time
+
+@click.group()
+def watch(): pass
+
+@watch.command()
+@click.argument("cmd", type=str)
+def lid(cmd):
+    if not os.path.exists("/proc/acpi/button/lid"):
+        print("Unsupported platform")
+        exit(1)
+
+    lids = os.listdir("/proc/acpi/button/lid")
+
+    if not lids:
+        print("No lids found")
+        exit(1)
+
+    print("lidwatch started")
+
+    prev_state = "open"
+    while True:
+        state = "closed"
+        for lid in lids:
+            with open(f"/proc/acpi/button/lid/{lid}/state") as f:
+                if "open" in f.read():
+                    state = "open"
+                    break
+
+        if prev_state == "open" and state == "closed":
+            print("Running", cmd)
+            os.system(cmd)
+        
+        prev_state = state
+        time.sleep(0.1)
+
+@watch.command()
+@click.argument("cmd", type=str)
+@click.option("--treshold", type=int, default=20)
+def battery(cmd, treshold):
+    batteries = glob.glob("/sys/class/power_supply/BAT*")
+
+    last_low = False
+    while True:
+        any_battery_low = False
+
+        for battery_path in batteries:
+            _, battery = os.path.split(battery_path)
+            upower = subprocess.check_output(["upower", "-i", f"/org/freedesktop/UPower/devices/battery_{battery}"]).decode()
+
+            for line_raw in upower.split("\n"):
+                line = line_raw.strip(" ")
+
+                if line.startswith("percentage:"):
+                    percentage = line.lstrip("percentage:").lstrip(" ").rstrip("%")
+
+                    if not percentage.isdigit():
+                        print(f"Error getting capacity for {battery}: Percentage not an integer ({percentage})", file=sys.stderr)
+                    else:
+                        if int(percentage) < treshold:
+                            any_battery_low = True
+
+        if any_battery_low and not last_low:
+            print("Running", cmd)
+            os.system(cmd)
+
+        last_low = any_battery_low
+        time.sleep(10)
+
+if __name__ == "__main__":
+    watch()

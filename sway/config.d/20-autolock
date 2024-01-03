@@ -1,2 +1,1 @@
 exec swayutil resume-autolock
-exec lidwatch lockscreen
