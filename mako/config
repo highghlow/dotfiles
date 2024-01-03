@@ -1,2 +1,13 @@
 background-color=#2b303b
 progress-color=over #4c7899
+
+[app-name="volume-display"]
+anchor=center
+default-timeout=1000
+text-alignment=center
+icon-path="~/.config/mako/icons"
+width=100
+height=100
+padding=10,10
+group-by=app-name
+format=<b>%s</b>\n<span>%b</span>

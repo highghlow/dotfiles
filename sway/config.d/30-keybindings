@@ -4,6 +4,13 @@ bindsym $mod+l exec 'swayutil lockscreen'
 # Dismiss last notification
 bindsym $mod+n exec 'makoctl dismiss'
 
+# Volume control
+bindsym $mod+f11 exec 'pactl set-sink-volume @DEFAULT_SINK@ +10% && swayutil volume-display && audio volume unmute'
+bindsym $mod+f10 exec 'pactl set-sink-volume @DEFAULT_SINK@ -10% && swayutil volume-display && audio volume unmute'
+
+# Dismiss all notifications
+bindsym $mod+Shift+n exec 'makoctl dismiss -a'
+
 # Start a terminal
 bindsym $mod+Return exec $term
 
