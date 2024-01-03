@@ -11,6 +11,9 @@ bindsym $mod+f10 exec 'pactl set-sink-volume @DEFAULT_SINK@ -10% && swayutil vol
 # Dismiss all notifications
 bindsym $mod+Shift+n exec 'makoctl dismiss -a'
 
+# Toggle autolock
+bindsym $mod+Ctrl+L exec 'swayutil toggle-autolock'
+
 # Start a terminal
 bindsym $mod+Return exec $term
 
