@@ -108,5 +108,11 @@ alias clr=clear
 alias ls=exa
 alias cat=bat
 alias grep=rg
+mcd () {
+
+mkdir $1
+cd $1
+
+}
 
 eval "$(starship init zsh)"
