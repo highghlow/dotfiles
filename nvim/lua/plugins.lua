@@ -56,6 +56,9 @@ return packer.startup(function(use)
 		}
 	}
 
+	use("neovim/nvim-lspconfig")
+	use("ms-jpq/coq_nvim")
+
 	use("williamboman/mason.nvim")
 
 	use("lewis6991/gitsigns.nvim")
@@ -64,6 +67,8 @@ return packer.startup(function(use)
 	use("voldikss/vim-floaterm")
 
 	use("aspeddro/gitui.nvim")
+
+	use("pocco81/auto-save.nvim")
 
 	use("EtiamNullam/deferred-clipboard.nvim")
 

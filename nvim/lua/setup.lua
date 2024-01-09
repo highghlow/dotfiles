@@ -11,3 +11,12 @@ vim.api.nvim_create_autocmd(
 	}
 )
 
+local lsp = require("lspconfig")
+
+vim.g.coq_settings = { auto_start='shut-up' }
+local coq = require("coq")
+
+lsp.pyright.setup(coq.lsp_ensure_capabilities({}))
+lsp.taplo.setup(coq.lsp_ensure_capabilities({}))
+lsp.lua_ls.setup(coq.lsp_ensure_capabilities({}))
+lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities({}))
