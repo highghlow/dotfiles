@@ -1,1 +1,1 @@
-exec swayutil resume-autolock
+exec ~/.local/swayutils/resume-autolock

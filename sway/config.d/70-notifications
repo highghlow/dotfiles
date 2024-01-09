@@ -1,3 +1,3 @@
 exec mako
 
-exec watchdevice battery 'notify-send "Low battery" "Connect the device to power"'
+exec ~/.local/bin/watchdevice battery 'notify-send "Low battery" "Connect the device to power"'

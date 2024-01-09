@@ -1,18 +1,18 @@
 # Lock the screen
-bindsym $mod+l exec 'swayutil lockscreen' 
+bindsym $mod+l exec '~/.local/swayutils/lockscreen' 
 
 # Dismiss last notification
 bindsym $mod+n exec 'makoctl dismiss'
 
 # Volume control
-bindsym $mod+f11 exec 'pactl set-sink-volume @DEFAULT_SINK@ +10% && swayutil volume-display && audio volume unmute'
-bindsym $mod+f10 exec 'pactl set-sink-volume @DEFAULT_SINK@ -10% && swayutil volume-display && audio volume unmute'
+bindsym $mod+f11 exec 'pactl set-sink-volume @DEFAULT_SINK@ +10% && ~/.local/swayutils/volume-display && ~/.local/bin/audio volume unmute'
+bindsym $mod+f10 exec 'pactl set-sink-volume @DEFAULT_SINK@ -10% && ~/.local/swayutils/volume-display && ~/.local/bin/audio volume unmute'
 
 # Dismiss all notifications
 bindsym $mod+Shift+n exec 'makoctl dismiss -a'
 
 # Toggle autolock
-bindsym $mod+Ctrl+L exec 'swayutil toggle-autolock'
+bindsym $mod+Ctrl+L exec '~/.local/swayutils/toggle-autolock'
 
 # Start a terminal
 bindsym $mod+Return exec $term
