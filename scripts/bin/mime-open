@@ -1,0 +1,67 @@
+#!/bin/env python3
+
+import click
+import subprocess
+import os
+import json
+
+def dict_path_exists(dct, path):
+    try:
+        dict_path_get(dct, path)
+        return True
+    except KeyError:
+        return False
+
+def dict_path_get(dct, path):
+    subdict = dct
+
+    for key in path:
+        if not isinstance(subdict, dict):
+            raise KeyError("not a dict")
+        if key not in subdict.keys():
+            raise KeyError("key not found")
+        subdict = subdict[key]
+    
+    return subdict 
+
+@click.command()
+@click.argument("filename", type=str)
+@click.option("--config", "-c", default="~/.config/mime-open/config.json")
+def mime_open(filename, config):
+    config = os.path.expanduser(config)
+    if not os.path.exists(config):
+        print("error: config file not found")
+        exit(1)
+
+    with open(config) as f:
+        config = json.load(f)
+
+    mimetype_output = subprocess.check_output(["mimetype", "-bM", filename])
+    mimetype = mimetype_output.decode()[:-1]
+    print("Mimetype:", mimetype)
+
+    mimetype_components = mimetype.split("/")
+
+    opener = None
+
+    for component_count in reversed(range(0, len(mimetype_components)+1)):
+        if component_count == len(mimetype_components):
+            used_components = mimetype_components
+        else:
+            used_components = mimetype_components[:component_count] + ["*"]
+
+        print("Trying", "/".join(used_components))
+
+        if dict_path_exists(config, used_components):
+            opener = dict_path_get(config, used_components)
+            break
+    
+    if not opener:
+        print("Could not find an opener for", mimetype)
+        exit(1)
+
+    print("Running", opener.format(filename))
+    os.system(opener.format(filename))
+
+if __name__ == "__main__":
+    mime_open()

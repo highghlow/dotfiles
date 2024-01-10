@@ -1,0 +1,10 @@
+{
+	"text": {
+		"*": "nvim \"{}\""
+	},
+	"application": {
+		"x-shellscript": "she \"{}\"",
+		"vnd.sqlite3": "sqlite3 \"{}\""
+	},
+	"*": "xdg-open \"{}\""
+}

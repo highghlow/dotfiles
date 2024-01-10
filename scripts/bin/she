@@ -1,0 +1,18 @@
+#!/bin/env python3
+
+import click
+from pick import pick
+import subprocess
+
+@click.command()
+@click.argument("file", type=str)
+def ask_run(file):
+    _, action = pick(["Run", "Edit"], file)
+
+    if action == 0:
+        exit(subprocess.run(["sh", file]).returncode)
+    else:
+        exit(subprocess.run(["nvim", file]).returncode)
+
+if __name__ == "__main__":
+    ask_run()
