@@ -72,6 +72,8 @@ return packer.startup(function(use)
 
 	use("EtiamNullam/deferred-clipboard.nvim")
 
+	use("nvim-lualine/lualine.nvim")
+
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end
