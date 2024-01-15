@@ -1,1 +1,1 @@
-notify-send -a volume-display "Volume" `audio volume get`
+notify-send -a volume-display "Volume" `~/.local/bin/audio volume get`
