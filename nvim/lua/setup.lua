@@ -30,3 +30,4 @@ lsp.lua_ls.setup(coq.lsp_ensure_capabilities({}))
 lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities({}))
 
 vim.cmd([[:set number]])
+vim.cmd([[:set noshowmode]])
