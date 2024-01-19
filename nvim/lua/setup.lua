@@ -31,3 +31,7 @@ lsp.rust_analyzer.setup(coq.lsp_ensure_capabilities({}))
 
 vim.cmd([[:set number]])
 vim.cmd([[:set noshowmode]])
+
+vim.g.floaterm_title = "Terminal"
+vim.g.floaterm_width = 0.9
+vim.g.floaterm_height = 0.9
