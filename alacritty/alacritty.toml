@@ -1,0 +1,56 @@
+[bell]
+animation = "EaseOutSine"
+color = "#5CFFC1"
+duration = 100
+
+[bell.command]
+args = ["/usr/share/sounds/sound-icons/capital"]
+program = "paplay"
+
+[colors.bright]
+black = "#666666"
+blue = "#7aa6da"
+cyan = "#70c0b1"
+green = "#4ACA4C"
+magenta = "#c397d8"
+red = "#d54e53"
+white = "#eaeaea"
+yellow = "#e7c547"
+
+[colors.dim]
+black = "#131415"
+blue = "#556a7d"
+cyan = "#5b7d78"
+green = "#487C44"
+magenta = "#75617b"
+red = "#864343"
+white = "#828482"
+yellow = "#9e824c"
+
+[colors.normal]
+black = "#1d1f21"
+blue = "#81a2be"
+cyan = "#8abeb7"
+green = "#6CBD68"
+magenta = "#b294bb"
+red = "#cc6666"
+white = "#c5c8c6"
+yellow = "#f0c674"
+
+[cursor]
+blink_interval = 750
+blink_timeout = 0
+
+[cursor.style]
+blinking = "On"
+shape = "Underline"
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+
+[window]
+dynamic_padding = true
+
+[window.padding]
+x = 5
+y = 1
