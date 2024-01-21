@@ -5,17 +5,9 @@ require('deferred-clipboard').setup {
   fallback = 'unnamedplus'
 }
 require("lualine").setup {
-	disabled_filetypes = { "lua" }
+	extensions = {"nvim-tree"}
 }
-require("neo-tree").setup({
-	close_if_last_window = true,
-	filesystem = {
-		follow_current_file = {
-			enabled = true,
-			leave_dirs_open = false
-		}
-	}
-});
+require("nvim-tree").setup()
 
 vim.api.nvim_create_autocmd('CursorMoved', {callback=require('lualine').refresh})
 

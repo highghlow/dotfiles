@@ -1,5 +1,5 @@
 vim.cmd([[:tnoremap <C-\><Esc> <C-\><C-n><Cmd>:FloatermHide<CR>]])
 vim.cmd([[:noremap <C-\><Esc> <Cmd>:FloatermToggle<CR>]])
-vim.cmd([[:noremap <C-k> <Cmd>:BufferPrevious<CR>]])
-vim.cmd([[:noremap <C-l> <Cmd>:BufferNext<CR>]])
-vim.cmd([[:noremap <C-j> <Cmd>:Neotree<CR>]])
+vim.cmd([[:noremap <S-Tab> <Cmd>:BufferPrevious<CR>]])
+vim.cmd([[:noremap <Tab> <Cmd>:BufferNext<CR>]])
+vim.cmd([[:noremap <C-j> <Cmd>:NvimTreeFocus<CR>]])
