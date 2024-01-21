@@ -1,8 +1,0 @@
-#!/bin/sh
-
-if [ -z "$2" ]; then
-	echo "error: not enough arguments"
-	exit 1
-fi
-
-pv "$1" > "$2"

@@ -108,7 +108,6 @@ alias clr=clear
 alias ls=exa
 alias cat=bat
 alias grep=rg
-alias cp=advcp
 mcd () {
 
 mkdir $1
