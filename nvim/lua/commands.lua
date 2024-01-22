@@ -1,6 +1,5 @@
-vim.cmd([[cnoreabbrev neotree Neotree]])
-vim.cmd([[cnoreabbrev neo Neotree]])
-vim.cmd([[cnoreabbrev nt Neotree]])
+vim.cmd([[cnoreabbrev nvimtree NvimTreeFocus]])
+vim.cmd([[cnoreabbrev nt NvimTreeFocus]])
 vim.cmd([[cnoreabbrev bc BufferClose]])
 vim.cmd([[cnoreabbrev ftn FloatermNew]])
 vim.cmd([[cnoreabbrev ftt FloatermToggle]])
