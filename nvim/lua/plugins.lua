@@ -67,6 +67,8 @@ return packer.startup(function(use)
 
 	use("nvim-lualine/lualine.nvim")
 
+	use("christoomey/vim-tmux-navigator")
+
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end
