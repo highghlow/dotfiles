@@ -117,3 +117,5 @@ cd $1
 
 source ~/.profile
 eval "$(starship init zsh)"
+
+export EDITOR=nvim
