@@ -69,6 +69,8 @@ return packer.startup(function(use)
 
 	use("christoomey/vim-tmux-navigator")
 
+	use("nvim-treesitter/nvim-treesitter")
+
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end
