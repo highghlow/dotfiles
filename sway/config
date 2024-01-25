@@ -1,2 +1,3 @@
 include ~/.sway/config.d/*
+include ~/.sway/local.d/*
 include /etc/sway/config.d/*
